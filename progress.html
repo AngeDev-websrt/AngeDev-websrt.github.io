@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="author" content="Espinoza Islas Angel Emilio">
+  <meta name="author" content="De La Rosa Ortega Axel Eduardo">
+  <meta name="author" content="Hernandez Ibarra David">
+  <meta name="author" content="Limon Fermandez Leonardo">
+  <title>Progreso - MecanoTec</title>
+  <link rel="stylesheet" href="css/progress.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Progreso del Usuario</h1>
+
+    <div class="section">
+      <div class="label">Ejercicios completados:</div>
+      <div class="value">[Dato no disponible]</div>
+    </div>
+
+    <div class="section">
+      <div class="label">Nivel actual:</div>
+      <div class="value">[Dato no disponible]</div>
+    </div>
+
+    <div class="section">
+      <div class="label">Promedio de velocidad:</div>
+      <div class="value">[Dato no disponible]</div>
+    </div>
+
+    <div class="section">
+      <div class="label">Porcentaje de precisión:</div>
+      <div class="value">[Dato no disponible]</div>
+    </div>
+
+    <!-- Medalla por Reto Final -->
+    <div id="medalBox" class="medal-box">
+      <div class="medal-icon">🏅</div>
+      <div class="medal-text">Reto Final completado — ¡Tecladista legendari@!</div>
+    </div>
+
+    <div class="placeholder-box">
+      Aquí se mostrará el resumen del rendimiento del usuario una vez que se integre la funcionalidad correspondiente.
+    </div>
+  </div>
+  
+  <!-- Botones abajo -->
+  <button id="backBtn" class="back-btn">Regresar</button>
+  <button id="resetBtn" class="reset-btn">Reiniciar juego</button>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // Leer datos de localStorage
+      const ejercicios = localStorage.getItem("ejerciciosCompletados");
+      const nivel = localStorage.getItem("nivelDesbloqueado");
+      const velocidad = localStorage.getItem("velocidadPromedio");
+      const precision = localStorage.getItem("precisionPromedio");
+      const retoCompletado = localStorage.getItem("retoCompletado") === "true";
+
+      // Rellenar valores en las secciones
+      const values = document.querySelectorAll(".section .value");
+
+      if (values[0]) {
+        values[0].textContent = ejercicios ? ejercicios : "Sin datos";
+      }
+
+      if (values[1]) {
+        if (nivel) {
+          let textoNivel;
+          switch (parseInt(nivel)) {
+            case 1: textoNivel = "Nivel 1"; break;
+            case 2: textoNivel = "Nivel 2"; break;
+            case 3: textoNivel = "Nivel 3"; break;
+            case 4: textoNivel = "Nivel 4"; break;
+            case 5: textoNivel = "Nivel 5"; break;
+            case 6: textoNivel = "Reto Final (Nivel 6)"; break;
+            default: textoNivel = `Nivel ${nivel}`;
+          }
+          values[1].textContent = textoNivel;
+        } else {
+          values[1].textContent = "Sin datos";
+        }
+      }
+
+      if (values[2]) {
+        values[2].textContent = velocidad ? `${velocidad} PPM` : "Sin datos";
+      }
+
+      if (values[3]) {
+        values[3].textContent = precision ? `${precision} %` : "Sin datos";
+      }
+
+      // Resumen y medalla
+      const placeholder = document.querySelector(".placeholder-box");
+      const medalBox = document.getElementById("medalBox");
+
+      if (ejercicios || nivel || velocidad || precision || retoCompletado) {
+        let resumen = `Has completado ${ejercicios || 0} ejercicios y has llegado hasta ${values[1].textContent}.`;
+
+        if (velocidad) {
+          resumen += ` Tu velocidad promedio registrada es de ${velocidad} PPM.`;
+        }
+        if (precision) {
+          resumen += ` Tu precisión promedio es de ${precision}%.`;
+        }
+        if (retoCompletado) {
+          resumen += ` 🎉 Además, completaste el Reto Final. ¡Impresionante!`;
+        }
+
+        placeholder.textContent = resumen;
+      } else {
+        placeholder.textContent = "Aún no hay datos de progreso. Completa los niveles para ver tu avance.";
+      }
+
+      if (retoCompletado && medalBox) {
+        medalBox.classList.add("visible");
+      }
+
+      // Botón regresar
+      const backBtn = document.getElementById("backBtn");
+      backBtn.addEventListener("click", () => {
+        window.location.href = "index_home.html";
+      });
+
+      // 🔴 Botón REINICIAR JUEGO
+      const resetBtn = document.getElementById("resetBtn");
+      resetBtn.addEventListener("click", () => {
+        const confirmar = confirm("¿Seguro que deseas reiniciar todo el juego? Se borrará todo el progreso.");
+        if (!confirmar) return;
+
+        // Borrar SOLO las claves del juego
+        localStorage.removeItem("ejerciciosCompletados");
+        localStorage.removeItem("nivelDesbloqueado");
+        localStorage.removeItem("velocidadPromedio");
+        localStorage.removeItem("precisionPromedio");
+        localStorage.removeItem("retoCompletado");
+
+        // Recargar para refrescar la vista
+        location.reload();
+      });
+    });
+  </script>
+</body>
+</html>

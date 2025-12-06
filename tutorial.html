@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="author" content="Espinoza Islas Angel Emilio">
+  <meta name="author" content="De La Rosa Ortega Axel Eduardo">
+  <meta name="author" content="Hernandez Ibarra David">
+  <meta name="author" content="Limon Fermandez Leonardo">
+  <title>Colocación de manos en el teclado</title>
+  <link rel="stylesheet" href="css/tutorial.css">
+</head>
+<body>
+  <div class="wrap" role="main">
+    <h1>Cómo colocar las manos en el teclado</h1>
+    <p class="lead">Guía visual y breve explicación para la colocación correcta de las manos y los dedos en un teclado QWERTY en español.</p>
+
+    <div class="grid">
+      <!-- texto explicativo -->
+      <div class="section" aria-labelledby="colocacion">
+        <h2 id="colocacion">Instrucciones básicas</h2>
+        <ul>
+          <li><strong>Postura:</strong> Siéntate erguido, pies apoyados, muñecas relajadas. Mantén los codos ligeramente abiertos a la altura del cuerpo.</li>
+          <li><strong>Fila base (home row):</strong> Coloca los dedos índices en las teclas <code>F</code> (mano izquierda) y <code>J</code> (mano derecha). Los demás dedos se colocan a lo largo de la fila: <code>A S D F</code> (izquierda) y <code>J K L Ñ</code> (derecha). Los pulgares descansan sobre la barra <strong>Espacio</strong>.</li>
+          <li><strong>Movimiento:</strong> Devuelve siempre los dedos a la fila base después de presionar una tecla. Usa sólo el dedo que corresponde a la tecla —así se reduce esfuerzo y se gana velocidad.</li>
+        </ul>
+
+        <h3>Función de cada dedo</h3>
+        <div class="legend" aria-hidden="false">
+          <div class="item"><span class="sw" style="background:var(--pinky)"></span> <strong>Meñique</strong> — teclas más a la izquierda y derecha (Shift, Tab, 1, 0, Ñ, etc.)</div>
+          <div class="item"><span class="sw" style="background:var(--ring)"></span> <strong>Anular</strong> — teclas junto al meñique en la fila base</div>
+          <div class="item"><span class="sw" style="background:var(--middle)"></span> <strong>Medio</strong> — teclas centrales de la fila base</div>
+          <div class="item"><span class="sw" style="background:var(--index)"></span> <strong>Índice</strong> — cubre varias teclas hacia arriba/abajo (p. ej. T G B y Y H N)</div>
+          <div class="item"><span class="sw" style="background:var(--thumb)"></span> <strong>Pulgar</strong> — barra espaciadora</div>
+        </div>
+
+        <p class="note"><strong>Consejo:</strong> Practica lentamente al principio y enfócate en precisión antes que en velocidad. Vuelve siempre a la fila base.</p>
+      </div>
+
+      <!-- SVG teclado + manos -->
+      <figure class="kbd-wrap" aria-label="Diagrama de teclado y manos">
+        <!-- SVG resumido -->
+       <svg viewBox="0 0 1100 420">
+  <image href="imagenes/tutorial.png" x="0" y="0" width="1100" height="420" />
+</svg>
+<figcaption>Diagrama estático: la fila base (A S D F / J K L Ñ) se muestra debajo de la silueta. Los colores indican qué dedo debe usarse.</figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <!-- Botón Regresar -->
+  <button id="backBtn" class="back-btn">Regresar</button>
+
+  <script>
+    document.getElementById("backBtn").addEventListener("click", () => {
+      window.location.href = "index_home.html";
+    });
+  </script>
+</body>
+</html>

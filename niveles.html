@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="author" content="Espinoza Islas Angel Emilio">
+  <meta name="author" content="De La Rosa Ortega Axel Eduardo">
+  <meta name="author" content="Hernandez Ibarra David">
+  <meta name="author" content="Limon Fermandez Leonardo">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Niveles</title>
+  <link rel="stylesheet" href="css/niveles.css">
+</head>
+<body>
+  <!-- Botón Regresar -->
+  <button id="backBtn" class="back-btn">Regresar</button>
+
+  <h1>Niveles</h1>
+  <p>Selecciona un nivel por favor</p>
+
+  <div class="grid-container">
+    <div class="level-box" data-level="1" onclick="selectLevel(this, 'juego.html')">
+      <span class="lock-icon">🔒</span>
+      Nivel 1
+      <img src="imagenes/gato1.jpg" alt="Imagen Nivel 1">
+    </div>
+    <div class="level-box" data-level="2" onclick="selectLevel(this, 'juego2.html')">
+      <span class="lock-icon">🔒</span>
+      Nivel 2
+      <img src="imagenes/gato2.jpg" alt="Imagen Nivel 2">
+    </div>
+    <div class="level-box" data-level="3" onclick="selectLevel(this, 'juego3.html')">
+      <span class="lock-icon">🔒</span>
+      Nivel 3
+      <img src="imagenes/gato3.jpg" alt="Imagen Nivel 3">
+    </div>
+    <div class="level-box" data-level="4" onclick="selectLevel(this, 'juego4.html')">
+      <span class="lock-icon">🔒</span>
+      Nivel 4
+      <img src="imagenes/gato4.jpg" alt="Imagen Nivel 4">
+    </div>
+    <div class="level-box" data-level="5" onclick="selectLevel(this, 'juego5.html')">
+      <span class="lock-icon">🔒</span>
+      Nivel 5
+      <img src="imagenes/gato5.jpg" alt="Imagen Nivel 5">
+    </div>
+    <div class="level-box" data-level="6" onclick="selectLevel(this, 'reto.html')">
+      <span class="lock-icon">🔒</span>
+      Reto
+      <img src="imagenes/gatolocura.jpg" alt="Imagen Reto">
+    </div>
+  </div>
+
+  <script>
+    // Al cargar la página, configuramos qué niveles están bloqueados
+    document.addEventListener("DOMContentLoaded", () => {
+      // Obtener el nivel más alto desbloqueado desde localStorage
+      let unlocked = localStorage.getItem("nivelDesbloqueado");
+
+      // Si no existe, por defecto solo el nivel 1 está desbloqueado
+      if (!unlocked) {
+        unlocked = 1;
+        localStorage.setItem("nivelDesbloqueado", 1);
+      } else {
+        unlocked = parseInt(unlocked);
+      }
+
+      const boxes = document.querySelectorAll(".level-box");
+
+      boxes.forEach((box) => {
+        const level = parseInt(box.getAttribute("data-level"));
+        const lockIcon = box.querySelector(".lock-icon");
+
+        if (level > unlocked) {
+          // Niveles bloqueados
+          box.classList.add("locked");
+          if (lockIcon) lockIcon.style.display = "block";
+        } else {
+          // Niveles desbloqueados
+          box.classList.remove("locked");
+          if (lockIcon) lockIcon.style.display = "none";
+        }
+      });
+    });
+
+    // Selección de niveles
+    function selectLevel(box, url) {
+      // Si está bloqueado, no hace nada
+      if (box.classList.contains("locked")) return;
+
+      const boxes = document.querySelectorAll('.level-box');
+      boxes.forEach(b => b.classList.remove('active'));
+      box.classList.add('active');
+
+      setTimeout(() => {
+        window.location.href = url;
+      }, 300);
+    }
+
+    // Botón regresar
+    document.getElementById("backBtn").addEventListener("click", () => {
+      window.location.href = "index_home.html";
+    });
+  </script>
+</body>
+</html>

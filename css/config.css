@@ -1,0 +1,65 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #c7bdfc;
+  margin: 0;
+  padding: 2rem;
+}
+
+.container {
+  max-width: 900px;
+  margin: auto;
+  background: white;
+  padding: 2rem;
+  border-radius: 20px;
+  border: 2px solid #88c4ff;
+  box-shadow: 0 0 15px rgba(0, 80, 255, 0.1);
+}
+
+h1 {
+  text-align: center;
+  color: #673ab7;
+  margin-bottom: 2rem;
+}
+
+.setting {
+  margin-bottom: 2rem;
+}
+
+.label {
+  font-weight: bold;
+  color: #3f51b5;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.input-placeholder {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px dashed #ccc;
+  border-radius: 10px;
+  background: #f5faff;
+  color: #999;
+  font-style: italic;
+}
+
+/* Botón regresar */
+.back-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 0.8rem 1.2rem;
+  font-size: 1rem;
+  font-weight: bold;
+  background-color: #673ab7;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.back-btn:hover {
+  background-color: #5a2ea6;
+  transform: scale(1.05);
+}

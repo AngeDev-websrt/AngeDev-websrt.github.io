@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="author" content="Espinoza Islas Angel Emilio">
+  <meta name="author" content="De La Rosa Ortega Axel Eduardo">
+  <meta name="author" content="Hernandez Ibarra David">
+  <meta name="author" content="Limon Fermandez Leonardo">
+  <title>Nivel 2</title>
+  <link rel="stylesheet" href="css/juego2.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Nivel 2</h1>
+    <div class="counter" id="counter">Completados 0/10</div>
+    <div id="correctAnimation"></div>
+    <div class="exercise-box" id="exerciseText">Escribe la palabra: </div>
+    <input type="text" placeholder="Escribe aquí..." id="textInput" autofocus />
+
+    <!-- Teclado completo -->
+    <div class="keyboard">
+      <div class="keyboard-row">
+        <div class="key" data-key="1">1</div>
+        <div class="key" data-key="2">2</div>
+        <div class="key" data-key="3">3</div>
+        <div class="key" data-key="4">4</div>
+        <div class="key" data-key="5">5</div>
+        <div class="key" data-key="6">6</div>
+        <div class="key" data-key="7">7</div>
+        <div class="key" data-key="8">8</div>
+        <div class="key" data-key="9">9</div>
+        <div class="key" data-key="0">0</div>
+        <div class="key" data-key="'">'</div>
+        <div class="key special" data-key="Backspace">←</div>
+      </div>
+      <div class="keyboard-row">
+        <div class="key special" data-key="Tab">Tab</div>
+        <div class="key" data-key="Q">Q</div>
+        <div class="key" data-key="W">W</div>
+        <div class="key" data-key="E">E</div>
+        <div class="key" data-key="R">R</div>
+        <div class="key" data-key="T">T</div>
+        <div class="key" data-key="Y">Y</div>
+        <div class="key" data-key="U">U</div>
+        <div class="key" data-key="I">I</div>
+        <div class="key" data-key="O">O</div>
+        <div class="key" data-key="P">P</div>
+        <div class="key" data-key="`">`</div>
+      </div>
+      <div class="keyboard-row">
+        <div class="key special" data-key="CapsLock">Caps</div>
+        <div class="key" data-key="A">A</div>
+        <div class="key" data-key="S">S</div>
+        <div class="key" data-key="D">D</div>
+        <div class="key" data-key="F">F</div>
+        <div class="key" data-key="G">G</div>
+        <div class="key" data-key="H">H</div>
+        <div class="key" data-key="J">J</div>
+        <div class="key" data-key="K">K</div>
+        <div class="key" data-key="L">L</div>
+        <div class="key" data-key="Ñ">Ñ</div>
+        <div class="key" data-key="´">´</div>
+      </div>
+      <div class="keyboard-row">
+        <div class="key special" data-key="Shift">Shift</div>
+        <div class="key" data-key="Z">Z</div>
+        <div class="key" data-key="X">X</div>
+        <div class="key" data-key="C">C</div>
+        <div class="key" data-key="V">V</div>
+        <div class="key" data-key="B">B</div>
+        <div class="key" data-key="N">N</div>
+        <div class="key" data-key="M">M</div>
+        <div class="key" data-key=",">,</div>
+        <div class="key" data-key=".">.</div>
+        <div class="key" data-key="-">-</div>
+        <div class="key special" data-key="ShiftRight">Shift</div>
+      </div>
+      <div class="keyboard-row">
+        <div class="key special" data-key="Control">Ctrl</div>
+        <div class="key special" data-key="Meta">⊞</div>
+        <div class="key special" data-key="Alt">Alt</div>
+        <div class="key special space" data-key=" ">Espacio</div>
+        <div class="key special" data-key="AltGraph">AltGr</div>
+        <div class="key special" data-key="ControlRight">Ctrl</div>
+      </div>
+    </div>
+
+    <div id="levelComplete" class="level-complete">🎉 ¡Felicidades, has pasado el nivel 2! 🎉</div>
+    <button id="nextLevelBtn" class="next-level-btn">Siguiente nivel</button>
+  </div>
+
+  <button id="backBtn" class="back-btn">Regresar</button>
+
+ <script>
+    const keys = document.querySelectorAll('.key');
+    const input = document.getElementById('textInput');
+    const exerciseText = document.getElementById('exerciseText');
+    const correctAnimation = document.getElementById('correctAnimation');
+    const counterDisplay = document.getElementById('counter');
+    const levelComplete = document.getElementById('levelComplete');
+    const nextLevelBtn = document.getElementById('nextLevelBtn');
+
+    // Cambié aquí los elementos por NOMBRES
+    const palabras = ["Ana", "Luis", "María", "José", "Sofía", "Diego", "Lucía", "Miguel", "Elena", "Ramón"];
+
+    let currentIndex = 0;
+    let completados = 0;
+    const totalPalabras = palabras.length;
+
+    function mostrarPalabra() {
+      if (currentIndex < palabras.length) {
+        exerciseText.innerHTML = `Escribe la palabra: ${palabras[currentIndex]}`;
+        input.value = "";
+        input.focus();
+      }
+    }
+
+    input.addEventListener('input', () => {
+      const textoUsuario = input.value;
+      const palabraActual = palabras[currentIndex];
+      let display = "";
+      for (let i = 0; i < palabraActual.length; i++) {
+        if (textoUsuario[i] == null) {
+          display += palabraActual[i];
+        } else if (textoUsuario[i] === palabraActual[i]) {
+          display += `<span class="correct">${palabraActual[i]}</span>`;
+        } else {
+          display += `<span class="wrong">${palabraActual[i]}</span>`;
+        }
+      }
+      exerciseText.innerHTML = `Escribe la palabra: ${display}`;
+    });
+
+    input.addEventListener('keydown', e => {
+      const key = e.key.toUpperCase();
+      const match = Array.from(keys).find(k => k.dataset.key.toUpperCase() === key);
+      if (match) {
+        match.classList.add('highlight');
+        setTimeout(() => match.classList.remove('highlight'), 150);
+      }
+
+      if (e.key === "Enter") {
+        e.preventDefault();
+        if (input.value === palabras[currentIndex]) {
+          mostrarAnimacion(true);
+          completados++;
+          counterDisplay.textContent = `Completados ${completados}/${totalPalabras}`;
+          currentIndex++;
+          if (completados >= totalPalabras) {
+            input.value = ""; 
+            mostrarNivelCompletado();
+          } else {
+            mostrarPalabra();
+          }
+        } else {
+          mostrarAnimacion(false);
+        }
+      }
+    });
+
+    function mostrarAnimacion(correcto) {
+      if (correcto) {
+        correctAnimation.innerHTML = `<div class="correct-animation">✅ ¡Correcto!</div>`;
+      } else {
+        correctAnimation.innerHTML = `<div class="incorrect-animation">❌ Incorrecto, intenta de nuevo</div>`;
+      }
+      setTimeout(() => { correctAnimation.innerHTML = ""; }, 1000);
+    }
+
+    function mostrarNivelCompletado() {
+
+      // ⭐⭐⭐ DESBLOQUEAR NIVEL 3 ⭐⭐⭐
+      const nivelActual = parseInt(localStorage.getItem("nivelDesbloqueado") || "1");
+      if (nivelActual < 3) {
+        localStorage.setItem("nivelDesbloqueado", 3);
+      }
+
+      // ⭐ Guardamos los ejercicios completados totales
+      // 10 del nivel 1 + 10 del nivel 2 = 20
+      localStorage.setItem("ejerciciosCompletados", 20);
+
+      // ⭐ Guardar velocidad y precisión (valores fijos)
+      localStorage.setItem("velocidadPromedio", 45);  // 45 PPM
+      localStorage.setItem("precisionPromedio", 92);  // 92 %
+
+      levelComplete.style.opacity = 1;
+      nextLevelBtn.style.display = "block";
+      input.disabled = true;
+    }
+
+    nextLevelBtn.addEventListener('click', () => {
+      window.location.href = "niveles.html";
+    });
+
+    document.getElementById("backBtn").addEventListener("click", () => {
+      window.location.href = "niveles.html";
+    });
+
+    mostrarPalabra();
+</script>
+
+</body>
+</html>
